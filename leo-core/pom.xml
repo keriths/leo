@@ -12,6 +12,23 @@
     <artifactId>leo-core</artifactId>
 
     <packaging>jar</packaging>
+    <properties>
+        <curator.version>2.4.2</curator.version>
+        <fastjson.version>1.2.3</fastjson.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-framework</artifactId>
+            <version>${curator.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+    </dependencies>
 
 
 

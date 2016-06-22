@@ -12,6 +12,7 @@
         <module>leo-core</module>
         <module>leo-web</module>
         <module>leo-demo</module>
+        <module>leo-client</module>
     </modules>
 
     <properties>
