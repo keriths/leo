@@ -16,19 +16,36 @@ public class TestAction {
 
     @Resource(name = "testService")
     TestService testService;
-    @RequestMapping(value = "/")
+    @RequestMapping(value = "/queryAllDomain")
     @ResponseBody
-    public String index(String configKey){
+    public String queryAllDomain(String domain){
         try {
-            System.out.println("******aaaaaa:"+ConfigManager.getDefaultInstance().getConfigValue("aaa"));
-            System.out.println("******name:"+testService.getName());
+            return ConfigManager.getDefaultInstance().getDomainConfigValues(domain).toString();
         } catch (Exception e) {
             e.printStackTrace();
+            return "出异常了";
         }
+    }
+
+    @RequestMapping(value = "/queryByKey")
+    @ResponseBody
+    public String queryByKey(String configKey){
         try {
-            return "configKey"+configKey+" value is :"+ConfigManager.getDefaultInstance().getConfigValue(configKey);
+            return ConfigManager.getDefaultInstance().getConfigValue(configKey);
         } catch (Exception e) {
-            return e.getMessage();
+            e.printStackTrace();
+            return "出异常了";
+        }
+    }
+
+    @RequestMapping(value = "/addConfigValue")
+    @ResponseBody
+    public String addConfigValue(String configKey,String value){
+        try {
+            return ConfigManager.getDefaultInstance().setConfigValues(configKey, value);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "出异常了";
         }
     }
 }
