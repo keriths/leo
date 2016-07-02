@@ -16,19 +16,19 @@
     </modules>
 
     <properties>
-        <mvn.host>mvn.fs.com</mvn.host>
+        <mvn.host>maven.wft.com</mvn.host>
     </properties>
 
     <distributionManagement>
         <repository>
-            <id>Releases</id>
-            <name>Nexus Releases Repository</name>
-            <url>http://${mvn.host}/content/repositories/releases/</url>
+            <id>releases</id>
+            <name>Internal Releases</name>
+            <url>http://maven.wft.com/content/repositories/releases</url>
         </repository>
         <snapshotRepository>
-            <id>Snapshots</id>
-            <name>Nexus Snapshots Repository</name>
-            <url>http://${mvn.host}/content/repositories/snapshots/</url>
+            <id>snapshots</id>
+            <name>Internal Snapshots</name>
+            <url>http://maven.wft.com/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
 </project>

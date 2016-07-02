@@ -12,16 +12,14 @@ public class TestConfigManager {
     public void setvalueTest() throws Exception {
 
         while (true){
-            try {
+
                 System.out.println(ConfigManager.getDefaultInstance().getConfigValue("domain.aaa"));
                 System.out.println(ConfigManager.getDefaultInstance().getConfigValue("domain.bbb"));
                 System.out.println(ConfigManager.getDefaultInstance().getConfigValue("domain.ccc"));
                 System.out.println(ConfigManager.getDefaultInstance().getConfigValue("domain.ddd"));
                 System.out.println(ConfigManager.getDefaultInstance().getConfigValue("domain.eee"));
-                Thread.sleep(5000);
-            }catch (Exception e){
-                e.printStackTrace();
-            }
+                break;
+
 
         }
 
