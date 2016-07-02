@@ -3,6 +3,7 @@ package com.fs.leo.client;
 import com.google.common.base.Strings;
 
 import java.util.Map;
+import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -15,7 +16,10 @@ public class ConfigManager implements ConfigChangeListener{
     private String zkAddress;
     private Map<String,String> configCacheMap = new ConcurrentHashMap<String, String>();
     private ConfigLoader configValueLoader;
-
+    private Properties localProperties = new Properties();
+    public void addlocalProperties(Properties properties){
+        localProperties.putAll(properties);
+    }
     private ConfigManager(String zkAddress) throws Exception {
         this.zkAddress = zkAddress;
         configValueLoader = new ZookeeperConfigLoader(zkAddress);
