@@ -15,6 +15,9 @@ public class ConfigKeyUtils {
     private static final String zkNodePathPrefix = "/config/";
     private static final String keyPattern = "^[a-zA-Z]+\\.[a-zA-Z0-9]+$";
     private static final String keyNodePathPattern = "^[a-zA-Z]+/[a-zA-Z0-9]+$";
+    public static boolean checkConfigKeyPattern(String configKey){
+        return checkPattern(keyPattern,configKey);
+    }
     public static String zkNodePathToConfigKey(String zkNodePath){
         if (!zkNodePath.startsWith(zkNodePathPrefix)){
             return null;
@@ -55,6 +58,21 @@ public class ConfigKeyUtils {
         Pattern p = Pattern.compile(pattern);
         Matcher m = p.matcher(value);
         return m.matches();
+    }
+
+    public static boolean isDynamicConfig(String key){
+        if (Strings.isNullOrEmpty(key)){
+            return false;
+        }
+        key = key.trim();
+        if (key.startsWith(prefix)&&key.endsWith(suffix)){
+            return true;
+        }
+        return false;
+    }
+
+    public static String getConfigKeyFromDynamicKey(String dynamicKey){
+        return dynamicKey.substring(dynamicKey.indexOf(prefix)+prefix.length(),dynamicKey.indexOf(suffix));
     }
 
 

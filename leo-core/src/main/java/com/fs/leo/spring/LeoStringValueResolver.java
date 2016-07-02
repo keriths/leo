@@ -1,7 +1,9 @@
 package com.fs.leo.spring;
 
+import com.fs.leo.client.ConfigKeyUtils;
 import com.fs.leo.client.ConfigManager;
 import com.fs.leo.exceptions.CannotConnectionException;
+import org.apache.log4j.Logger;
 import org.springframework.util.StringValueResolver;
 
 import java.util.Properties;
@@ -10,27 +12,17 @@ import java.util.Properties;
  * Created by fanshuai on 16/7/2.
  */
 public class LeoStringValueResolver implements StringValueResolver {
-    private String prefix="${";
-    private String suffix = "}";
-    private Properties props;
-    public LeoStringValueResolver(String prefix,String suffix,Properties props){
-        this.prefix = prefix;
-        this.suffix = suffix;
-        this.props=props;
-    }
+    private final Logger log = Logger.getLogger(LeoStringValueResolver.class);
     @Override
     public String resolveStringValue(String value){
-        if(!checkCanReset(value)){
+        if(!ConfigKeyUtils.isDynamicConfig(value)){
             return value;
         }
         try {
-            String valueKey = getRatPropertiesKey(value);
+            String valueKey = ConfigKeyUtils.getConfigKeyFromDynamicKey(value);
             String newString = ConfigManager.getDefaultInstance().getConfigValue(valueKey);
-            if(newString==null&&props!=null){
-                newString = props.getProperty(valueKey);
-            }
             if(newString==null){
-                throw new Exception(value+" setting is null");
+                log.warn("**************** setting name ["+value+"] not found really value set to null  ****************");
             }
             value = newString;
         } catch (CannotConnectionException e) {
@@ -41,17 +33,5 @@ public class LeoStringValueResolver implements StringValueResolver {
             throw new RuntimeException(e);
         }
         return value;
-    }
-    private String getRatPropertiesKey(String value){
-        return value.substring(value.indexOf(prefix)+prefix.length(),value.indexOf(suffix));
-    }
-    private boolean checkCanReset(String value){
-        if(!value.startsWith(prefix)){
-            return false;
-        }
-        if(!value.endsWith(suffix)){
-            return false;
-        }
-        return true;
     }
 }

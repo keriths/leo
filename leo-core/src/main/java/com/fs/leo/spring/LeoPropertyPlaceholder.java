@@ -21,17 +21,14 @@ import java.util.*;
  */
 public class LeoPropertyPlaceholder implements BeanFactoryPostProcessor {
     private Resource[] locations;
-    private Properties props;
     private final Logger log = Logger.getLogger(LeoPropertyPlaceholder.class);
-    private String prefix="${";
-    private String suffix = "}";
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         String bname=null;
         String pname=null;
         try {
             initLocalPropertieFiles();//兼容文件配置方式，文件中有的全记录下来
-            StringValueResolver stringValueResolver=new LeoStringValueResolver(prefix,suffix,props);
+            StringValueResolver stringValueResolver=new LeoStringValueResolver();
             String [] beanNames = beanFactory.getBeanDefinitionNames();
             for (String beanName:beanNames){
                 bname = beanName;
@@ -62,7 +59,6 @@ public class LeoPropertyPlaceholder implements BeanFactoryPostProcessor {
                 Properties properties = new Properties();
                 properties.load(resource.getInputStream());
                 ConfigManager.getDefaultInstance().addlocalProperties(properties);
-                props.putAll(properties);
             } catch (IOException e) {
                 throw new Exception();
             }
@@ -136,14 +132,6 @@ public class LeoPropertyPlaceholder implements BeanFactoryPostProcessor {
 
     private String mergeStringValue(String value,StringValueResolver stringValueResolver) throws Exception{
         return stringValueResolver.resolveStringValue(value);
-    }
-
-    public void setPrefix(String prefix) {
-        this.prefix = prefix;
-    }
-
-    public void setSuffix(String suffix) {
-        this.suffix = suffix;
     }
 
     public void setLocations(Resource[] locations) {

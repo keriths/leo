@@ -16,7 +16,7 @@ public class ConfigManager implements ConfigChangeListener{
     private String zkAddress;
     private Map<String,String> configCacheMap = new ConcurrentHashMap<String, String>();
     private ConfigLoader configValueLoader;
-    private Properties localProperties = new Properties();
+    private Properties localProperties = new Properties ();
     public void addlocalProperties(Properties properties){
         localProperties.putAll(properties);
     }
@@ -69,6 +69,21 @@ public class ConfigManager implements ConfigChangeListener{
 
 
     public String getConfigValue(String key) throws Exception {
+        if (Strings.isNullOrEmpty(key)){
+            return null;
+        }
+        key = key.trim();
+        Object localValue = localProperties.get(key);
+        if (localValue!=null){
+            if (ConfigKeyUtils.isDynamicConfig(localValue.toString())){
+                key = ConfigKeyUtils.getConfigKeyFromDynamicKey(localValue.toString());
+            }else {
+                return localValue.toString();
+            }
+        }
+        if (!ConfigKeyUtils.checkConfigKeyPattern(key)){
+            return null;
+        }
         String value = configCacheMap.get(key);
         if (value==null){
             value = getConfigValueFromLoader(key);
