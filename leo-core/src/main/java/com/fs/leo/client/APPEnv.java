@@ -5,7 +5,7 @@ package com.fs.leo.client;
  */
 public class APPEnv {
     private static String appName="leo";
-    private static String configZKaddress="192.168.120.134:2181";
+    private static String configZKaddress="192.168.137.128:2181";
 
 
     public static String getAppName() {

@@ -75,5 +75,9 @@ public class ConfigKeyUtils {
         return dynamicKey.substring(dynamicKey.indexOf(prefix)+prefix.length(),dynamicKey.indexOf(suffix));
     }
 
+    public static String getConfigRootPath(){
+        return zkNodePathPrefix;
+    }
+
 
 }

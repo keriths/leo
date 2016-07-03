@@ -2,6 +2,7 @@ package com.fs.leo.client;
 
 import com.google.common.base.Strings;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
@@ -102,5 +103,8 @@ public class ConfigManager implements ConfigChangeListener{
         return configValueLoader.getDomainConfigValues(domain);
     }
 
+    public  List<String> getAllDomains() throws Exception {
+        return configValueLoader.getAllDomains();
+    }
 
 }

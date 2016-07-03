@@ -39,6 +39,13 @@ public class ZookeeperConfigLoader implements ConfigLoader ,CuratorListener,Conn
         configChangeListenerList.add(configChangeListener);
     }
 
+    public List<String> getAllDomains() throws Exception {
+        if (existsNode(ConfigKeyUtils.getConfigRootPath()){
+            return getChildren(ConfigKeyUtils.getConfigRootPath());
+        }
+        return null;
+    }
+
     public ZookeeperConfigLoader(String zkAddress) throws Exception {
         this.zkAddress = zkAddress;
         init();
@@ -86,9 +93,12 @@ public class ZookeeperConfigLoader implements ConfigLoader ,CuratorListener,Conn
 
     @Override
     public Map<String, String> getDomainConfigValues(String domain) throws Exception {
-        String domainPath = ConfigKeyUtils.getDomainNodePath(domain);
-        List<String> childrenPathList =  getChildren(domainPath);
         Map<String,String> domainConfigValueMap = new HashMap<String, String>();
+        String domainPath = ConfigKeyUtils.getDomainNodePath(domain);
+        if (!existsNode(domainPath)){
+            return domainConfigValueMap;
+        }
+        List<String> childrenPathList =  getChildren(domainPath);
         for (String childrenPath:childrenPathList){
             try {
                 String confitNodePath = domainPath+"/"+childrenPath;

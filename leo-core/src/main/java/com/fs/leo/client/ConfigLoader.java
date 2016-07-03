@@ -2,6 +2,7 @@ package com.fs.leo.client;
 
 import com.fs.leo.exceptions.ConfigKeyPatternException;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,4 +15,6 @@ public interface ConfigLoader {
 
     Map<String,String> getDomainConfigValues(String domain) throws Exception;
     public void addConfigChangeListener(ConfigChangeListener configChangeListener);
+
+    List<String> getAllDomains() throws Exception;
 }

@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>leo-core</module>
+        <module>leo-web</module>
         <module>leo-demo</module>
     </modules>
 
