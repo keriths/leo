@@ -1,16 +1,113 @@
-<html>
-<head>
-
-</head>
-<body>
-    <form action="/queryAllDomain">
-        query domain all key:<input name="domain"><input type="submit" value="query">
-    </form>
-    <form action="/queryByKey">
-        query by key:<input name="configKey"><input type="submit" value="query">
-    </form>
-    <form action="/addConfigValue">
-        set a config value:<input name="configKey"><input name="value"><input type="submit" value="query">
-    </form>
-</body>
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>火锅季 - 五分田生鲜</title>
+        <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+        <style type="text/css">
+            body {margin:0px;
+                border:0px;
+                padding:0px;font-size: 14px; }
+            #top{background-color: #cccccc;height: 50px;margin: 0;padding: 0;}
+            #bottom{color:red; left:0;background:#ccc; height:30px; position:fixed; bottom:0; z-index:999;  overflow:visible;
+                width:100%;
+                /* for IE6 */
+                _top: expression(documentElement.scrollTop + documentElement.clientHeight-this.offsetHeight);
+                _position:absolute;
+                /* for IE6 */}
+            #body{background-color: #dde9f5;}
+            #domain_list_ul{font-size: 20px;list-style: none;background-color: #ccc;
+                margin:0px;}
+            #domain_list_ul li {
+                float: left;padding: 3px 10px 3px 10px;
+                border-left:1px solid white;}
+            #domain_list_ul li:last-child{
+                float: left;padding: 3px 10px 3px 10px;
+                border-left:1px solid white;border-right: 1px solid white;}
+            #domain_all_config_content_table{
+                line-height:30px;
+                margin:10px 0 0 40px;
+                border: 0px solid black;
+                width: 900px;;
+            }
+            #domain_all_config_content_table thead{font-weight: bold;}
+            #domain_all_config_content_table thead tr{}
+            #domain_all_config_content_table thead tr td {border: 1px solid #ccc;padding: 0px;margin: 0px;}
+            #domain_all_config_content_table tbody {}
+            #domain_all_config_content_table tbody tr{}
+            #domain_all_config_content_table tbody tr td{border: 1px solid #ccc;}
+        </style>
+    </head>
+    <body>
+        <div id="top">
+            <div style="padding: 15px 0 0 30px;">
+                配置管理中心
+            </div>
+        </div>
+        <div id="body">
+            <ul id="domain_list_ul">
+                <li style="">mgt</li>
+                <li>h5</li>
+                <li>pms</li>
+                <li>dubbo</li>
+                <li>www</li>
+                <li>member</li>
+            </ul>
+            <div style="clear: both;"></div>
+            <section>
+                <table id="domain_all_config_content_table">
+                    <thead>
+                    <tr>
+                        <td width="10%">序号</td>
+                        <td width="25%">key</td>
+                        <td width="25%">描述</td>
+                        <td width="30%">value</td>
+                        <td width="10%">操作</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>www.wft_main_databaseUrl</td>
+                        <td>main数据库url地址</td>
+                        <td>192.168.1.1：3306</td>
+                        <td>编辑  删除</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>www.wft_main_databaseUrl</td>
+                        <td>main数据库url地址</td>
+                        <td>192.168.1.1：3306</td>
+                        <td>编辑  删除</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>www.wft_main_databaseUrl</td>
+                        <td>main数据库url地址</td>
+                        <td>192.168.1.1：3306</td>
+                        <td>编辑  删除</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>www.wft_main_databaseUrl</td>
+                        <td>main数据库url地址</td>
+                        <td>192.168.1.1：3306</td>
+                        <td>编辑  删除</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>www.wft_main_databaseUrl</td>
+                        <td>main数据库url地址</td>
+                        <td>192.168.1.1：3306</td>
+                        <td>编辑  删除</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+        <div id="bottom">
+            这是底部
+        </div>
+    </body>
 </html>
